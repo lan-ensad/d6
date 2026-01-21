@@ -8,6 +8,8 @@ fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributi
         const personData = new Map();
         const topicData = new Map();
         const contributions = []; // Pour stocker les contributions collectives
+        const typesPapier = new Map();
+        const typesWeb = new Map();
 
         let isPinned = false;
 
@@ -22,6 +24,14 @@ fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributi
                     quoi: contribution.quoi,
                     topics: contribution.topic
                 });
+            }
+
+            // Collecter les types de contributions avec comptage
+            if (contribution.quoi.papier && contribution.quoi.papier !== 'N/A') {
+                typesPapier.set(contribution.quoi.papier, (typesPapier.get(contribution.quoi.papier) || 0) + 1);
+            }
+            if (contribution.quoi.web && contribution.quoi.web !== 'N/A') {
+                typesWeb.set(contribution.quoi.web, (typesWeb.get(contribution.quoi.web) || 0) + 1);
             }
 
             personnes.forEach(p => {
@@ -280,7 +290,25 @@ fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributi
             <p>Topics <span>${topicSet.size}</span></p>
         `;
 
+        // Types de contributions
+        const typesEl = document.getElementById('contribution-types');
+        const papierList = Array.from(typesPapier.entries())
+            .sort((a, b) => b[1] - a[1])
+            .map(([type, count]) => `<p>${type} <span>${count}</span></p>`)
+            .join('');
+        const webList = Array.from(typesWeb.entries())
+            .sort((a, b) => b[1] - a[1])
+            .map(([type, count]) => `<p>${type} <span>${count}</span></p>`)
+            .join('');
+        typesEl.innerHTML = `
+            <h5>Papier</h5>
+            ${papierList}
+            <h5>Web</h5>
+            ${webList}
+        `;
+
         // Liste des topics triés par nombre de contributeurs
+        document.getElementById('topic-count').textContent = topicSet.size;
         const topicsSorted = Array.from(topicData.entries())
             .sort((a, b) => b[1].personnes.length - a[1].personnes.length);
 

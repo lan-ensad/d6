@@ -133,6 +133,48 @@ svg {
     border-top: 1px solid var(--color-border);
 }
 
+.legend h4 {
+    margin: 12px 0 6px 0;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-light);
+}
+
+.legend h4:first-child {
+    margin-top: 0;
+}
+
+#contribution-types {
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+#contribution-types h5 {
+    margin: 8px 0 4px 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+#contribution-types p {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#contribution-types p:last-child {
+    border-bottom: none;
+}
+
+#contribution-types span {
+    font-weight: 600;
+    color: var(--color-person);
+}
+
 .legend-item {
     display: flex;
     align-items: center;
@@ -216,8 +258,8 @@ svg {
 /* Panel info */
 #info {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
+    top: 20px;
+    left: 240px;
     background: white;
     border-radius: var(--radius);
     padding: 20px;
