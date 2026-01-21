@@ -1,4 +1,4 @@
-fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributions.json?token=GHSAT0AAAAAADLR6VMVOCMDH3MIRA6Q22LE2LQYCYA')
+fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributions.json')
     .then(response => response.json())
     .then(data => {
         const nodes = [];
