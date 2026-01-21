@@ -22,17 +22,17 @@ fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributi
                 contributions.push({
                     id: `contrib-${index}`,
                     personnes: personnes.map(p => p.nom),
-                    quoi: contribution.quoi,
+                    typologie: contribution.typologie,
                     topics: contribution.topic
                 });
             }
 
             // Collecter les types de contributions avec comptage
-            if (contribution.quoi.papier && contribution.quoi.papier !== 'N/A') {
-                typesPapier.set(contribution.quoi.papier, (typesPapier.get(contribution.quoi.papier) || 0) + 1);
+            if (contribution.typologie.papier && contribution.typologie.papier !== 'N/A') {
+                typesPapier.set(contribution.typologie.papier, (typesPapier.get(contribution.typologie.papier) || 0) + 1);
             }
-            if (contribution.quoi.web && contribution.quoi.web !== 'N/A') {
-                typesWeb.set(contribution.quoi.web, (typesWeb.get(contribution.quoi.web) || 0) + 1);
+            if (contribution.typologie.web && contribution.typologie.web !== 'N/A') {
+                typesWeb.set(contribution.typologie.web, (typesWeb.get(contribution.typologie.web) || 0) + 1);
             }
 
             personnes.forEach(p => {
@@ -43,7 +43,7 @@ fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributi
                         rattachement: p.rattachement,
                         contact: p.contact,
                         topics: [],
-                        quoi: contribution.quoi
+                        typologie: contribution.typologie
                     });
                 }
                 contribution.topic.forEach(t => {
@@ -213,8 +213,8 @@ fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributi
                     <ul>${p.topics.map(t => `<li>${t}</li>`).join('')}</ul>
                     <p><strong>Contribution:</strong></p>
                     <ul>
-                        <li>Papier: ${p.quoi.papier}</li>
-                        <li>Web: ${p.quoi.web}</li>
+                        <li>Papier: ${p.typologie.papier}</li>
+                        <li>Web: ${p.typologie.web}</li>
                     </ul>
                 `;
             } else {
@@ -251,8 +251,8 @@ fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributi
                 <ul>${contrib.topics.map(t => `<li>${t}</li>`).join('')}</ul>
                 <p><strong>Format:</strong></p>
                 <ul>
-                    <li>Papier: ${contrib.quoi.papier}</li>
-                    <li>Web: ${contrib.quoi.web}</li>
+                    <li>Papier: ${contrib.typologie.papier}</li>
+                    <li>Web: ${contrib.typologie.web}</li>
                 </ul>
             `;
 
