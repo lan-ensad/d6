@@ -12,7 +12,8 @@
             "contact":"angelo.careri@ensad.fr"
         }],
         "topic":[
-            "jeux-vidéo"
+            "jeux-vidéo",
+            "art"
         ],
         "typologie":{
             "papier":"essai",
@@ -56,7 +57,7 @@
         "topic":[
             "infrastructure",
             "architecture",
-            "réseau"
+            "société"
         ],
         "typologie":{
             "papier":"entretient",
