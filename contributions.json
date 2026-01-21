@@ -14,7 +14,7 @@
         "topic":[
             "jeux-vidéo"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"jeux-vidéo itch.io"
         }
@@ -36,7 +36,7 @@
             "intelligence artificielle",
             "art"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"vidéo performance"
         }
@@ -58,7 +58,7 @@
             "architecture",
             "réseau"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"entretient",
             "web":"N/A"
         }
@@ -80,7 +80,7 @@
             "musique",
             "intelligence artificielle"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"composition textuelle hybride"
         }
@@ -96,7 +96,7 @@
             "interactivité",
             "art"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"N/A"
         }
@@ -112,7 +112,7 @@
             "interactivité",
             "art"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"script"
         }
@@ -126,7 +126,7 @@
         "topic":[
             "intelligence artificielle"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"N/A"
         }
@@ -141,7 +141,7 @@
             "textile",
             "interactivité"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"N/A"
         }
@@ -157,7 +157,7 @@
             "interactivité",
             "intelligence artificielle"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"N/A"
         }
@@ -171,7 +171,7 @@
         "topic":[
             "art"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"N/A"
         }
@@ -186,7 +186,7 @@
             "code",
             "outils"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"script"
         }
@@ -202,7 +202,7 @@
             "outils",
             "pédagogie"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"script"
         }
@@ -217,7 +217,7 @@
             "sex bot",
             "société"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"N/A"
         }
@@ -231,7 +231,7 @@
         "topic":[
             "art"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"portefolio",
             "web":"N/A"
         }
@@ -247,7 +247,7 @@
             "société",
             "reconstitution"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"N/A"
         }
@@ -263,7 +263,7 @@
             "partage",
             "commun numérique"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"N/A"
         }
@@ -279,7 +279,7 @@
             "pédagogie",
             "commun numérique"
         ],
-        "quoi":{
+        "typologie":{
             "papier":"essai",
             "web":"N/A"
         }
