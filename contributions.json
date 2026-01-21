@@ -22,6 +22,28 @@
     {
         "qui":
         [{
+            "nom":"Flora Bouteille",
+            "rattachement":"ensad",
+            "contact":"flora.bouteille@ensad.fr"
+        },
+        {
+            "nom":"Victor Villafagne",
+            "rattachement":"ensad",
+            "contact":"victor.villafagne@ensad.fr"
+        }],
+        "topic":[
+            "société",
+            "intelligence artificielle",
+            "art"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"vidéo performance"
+        }
+    },
+    {
+        "qui":
+        [{
             "nom":"Justinien Tribillion",
             "rattachement":"ensad",
             "contact":"justinien.tribillon@ensad.fr"

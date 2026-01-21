@@ -1,4 +1,5 @@
 fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributions.json')
+// fetch('contributions.json')
     .then(response => response.json())
     .then(data => {
         const nodes = [];
