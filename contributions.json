@@ -1,0 +1,265 @@
+[
+    {
+        "qui":
+        [{
+            "nom":"Stella Jacob",
+            "rattachement":"ensad",
+            "contact":"stella.jacob@ensad.fr"
+        },
+        {
+            "nom":"Angelo Careri",
+            "rattachement":"ensad",
+            "contact":"angelo.careri@ensad.fr"
+        }],
+        "topic":[
+            "jeux-vidéo"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"jeux-vidéo itch.io contenu web"
+        }
+    },
+    {
+        "qui":
+        [{
+            "nom":"Justinien Tribillion",
+            "rattachement":"ensad",
+            "contact":"justinien.tribillon@ensad.fr"
+        },
+        {
+            "nom":"Soline Nivet",
+            "rattachement":"ensad",
+            "contact":"contact@soline-nivet.fr"
+        }],
+        "topic":[
+            "infrastructure",
+            "architecture",
+            "réseau"
+        ],
+        "quoi":{
+            "papier":"entretient",
+            "web":"N/A"
+        }
+    },
+    {
+        "qui":
+        [{
+            "nom":"Bertrand Gauguet",
+            "rattachement":"ensad",
+            "contact":"bertrand.gauguet@ensad.fr"
+        },
+        {
+            "nom":"Benoît Montigné",
+            "rattachement":"ensad",
+            "contact":"benoit.montigne@ensad.fr"
+        }],
+        "topic":[
+            "son",
+            "musique",
+            "intelligence artificielle"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"composition textuelle hybride"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Charlie Aubry",
+            "rattachement":"ensad",
+            "contact":"charlie.aubry@ensad.fr"
+        },
+        "topic":[
+            "sculpture",
+            "interactivité",
+            "art"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"N/A"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Olivain Porry",
+            "rattachement":"ensad",
+            "contact":"op@olivain.art"
+        },
+        "topic":[
+            "intelligence artificielle",
+            "interactivité",
+            "art"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"script"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Stéphane Degoutin",
+            "rattachement":"ensad",
+            "contact":"stephane.degoutin@ensad.fr"
+        },
+        "topic":[
+            "intelligence artificielle"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"N/A"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Maude Guirault",
+            "rattachement":"ensad",
+            "contact":"maude.guirault@ensad.fr"
+        },
+        "topic":[
+            "textile",
+            "interactivité"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"N/A"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Corentin Loubet",
+            "rattachement":"ensad",
+            "contact":"corentin.loubet@ensad.fr"
+        },
+        "topic":[
+            "surveillance",
+            "interactivité",
+            "intelligence artificielle"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"N/A"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Marie Lechner",
+            "rattachement":"ensad",
+            "contact":"marie.lechner@ensad.fr"
+        },
+        "topic":[
+            "art"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"N/A"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Adrien Payet",
+            "rattachement":"programmeur",
+            "contact":"adrien@studio-variable.com"
+        },
+        "topic":[
+            "code",
+            "outils"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"script"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Jean-Noël Lafargue",
+            "rattachement":"pédagogue",
+            "contact":"jnlafargue@gmail.com"
+        },
+        "topic":[
+            "code",
+            "outils",
+            "pédagogie"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"script"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Saul Pandelakis",
+            "rattachement":"artiste",
+            "contact":"saul.pandelakis@gmail.com"
+        },
+        "topic":[
+            "sex bot",
+            "société"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"N/A"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Josefa Ntjam",
+            "rattachement":"artiste",
+            "contact":"studio.josefantjam@gmail.com"
+        },
+        "topic":[
+            "art"
+        ],
+        "quoi":{
+            "papier":"portefolio",
+            "web":"N/A"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Guillaume Seyller",
+            "rattachement":"INDEX",
+            "contact":"guillaume.seyller@gmail.com"
+        },
+        "topic":[
+            "surveillance",
+            "société",
+            "reconstitution"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"N/A"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Outdoor Computer Club",
+            "rattachement":"Outdoor Computer Club",
+            "contact":"outdoorcomputer@club1.fr"
+        },
+        "topic":[
+            "décroissance",
+            "partage",
+            "commun numérique"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"N/A"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Audrey Samson",
+            "rattachement":"ERG Bruxelles",
+            "contact":"audrey.samson@erg.be"
+        },
+        "topic":[
+            "commun numérique",
+            "pédagogie",
+            "commun numérique"
+        ],
+        "quoi":{
+            "papier":"essai",
+            "web":"N/A"
+        }
+    }
+]

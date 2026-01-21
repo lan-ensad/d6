@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartographie des Contributeurs</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .legend {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .legend h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .legend-item {
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .visualization {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .node {
+            cursor: pointer;
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+
+        .node:hover {
+            stroke-width: 3px;
+            stroke: #333;
+        }
+
+        .link {
+            stroke: #999;
+            stroke-opacity: 0.4;
+            stroke-width: 1px;
+        }
+
+        .link:hover {
+            stroke-opacity: 0.8;
+            stroke-width: 2px;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            pointer-events: none;
+            font-size: 12px;
+            max-width: 200px;
+            z-index: 1000;
+        }
+
+        .filter-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            background: #45a049;
+        }
+
+        .filter-btn.active {
+            background: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cartographie des Contributeurs</h1>
+
+        <div class="controls">
+            <h3>Filtres par type (Quoi):</h3>
+            <button class="filter-btn" onclick="filterByType('all')">Tout afficher</button>
+            <div id="type-filters"></div>
+        </div>
+
+        <div class="legend">
+            <h3>Légende des couleurs (Quoi):</h3>
+            <div id="legend-content"></div>
+        </div>
+
+        <div class="visualization">
+            <svg id="network" width="1160" height="800"></svg>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip" style="display: none;"></div>
+
+    <script>
+        const csvData = {
+            internal: `Qui,Quoi,Topic
+Stell + Angelo Carreri,jeux vidéo indé,"jeux vidéo, queer"
+Justinien Tribillon + SoNi/FaLo,texte,"échelles, infrastructures, énergie"
+Bertrand Gauguet + Benoit Montingé,"son, musique","musique expérimentale, IA ?"
+Charlie Aubry,image,portefolio
+Olivain Porry + Albertine Meunier,"Image, vidéo",portefolio
+Flora Bouteille + Victor Villafane,"image, vidéo","rendu MRC, IA, performance, streaming médias"
+Stéphane Degoutin,image,"portefolio, IA ?, choix d'artistes ?"
+Maude Guiraud,image,"portefolio, textile"
+Corentin Loubet,image,"portefolio, surveillance, IA"
+Marie Lechner,image,"portefolio, choix d'artistes ?"`,
+
+            external: `Qui,Quoi,Topic
+Jean-Noël Lafargue,interview,"outils, pédagogie, portefolio"
+ERG Bruxelles,"texte, image","Cross-over, hacking social, institution, pédagogie"
+Félix Tréguer,texte,Capitalisme de surveillance
+Outdoor computer club,image,Cyberfeminisme
+Saul Pandelakis + Anthonu Mazure,texte,Sex-bot
+https://cyber.nymph.garden/,image,"portefolio, worshop ?"
+Iona Vreme Moser,image,"portefolio, feminisme"
+Sumboy,image/son/vidéo,decolonialisme
+Soline Nivet / Fanny Lopez + JuTr,texte,"échelles, infrastructures, énergie"
+Feldup,image/son/vidéo,"espace, ruines numérique"
+Ashikara,image/son/vidéo,"Jeux-vidéo, infrastructure"`
+        };
+
+        const svg = d3.select('#network');
+        const width = 1160;
+        const height = 800;
+
+        let nodes = [];
+        let links = [];
+        let allData = [];
+        let currentFilter = 'all';
+
+        const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
+        function parseCSV(csvString) {
+            const lines = csvString.trim().split('\n');
+            const headers = lines[0].split(',');
+
+            return lines.slice(1).map(line => {
+                const values = line.split(',');
+                const obj = {};
+                headers.forEach((header, i) => {
+                    obj[header] = values[i] ? values[i].replace(/"/g, '') : '';
+                });
+                return obj;
+            });
+        }
+
+        function processData() {
+            const internalData = parseCSV(csvData.internal);
+            const externalData = parseCSV(csvData.external);
+
+            allData = [
+                ...internalData.map(d => ({...d, source: 'internal'})),
+                ...externalData.map(d => ({...d, source: 'external'}))
+            ];
+
+            const quoiTypes = [...new Set(allData.map(d => d.Quoi))];
+            const topics = [...new Set(allData.flatMap(d =>
+                d.Topic.split(',').map(t => t.trim())))];
+
+            nodes = [];
+            links = [];
+
+            allData.forEach((d, i) => {
+                const contributorNode = {
+                    id: `contributor_${i}`,
+                    name: d.Qui,
+                    type: 'contributor',
+                    quoi: d.Quoi,
+                    topic: d.Topic,
+                    source: d.source,
+                    color: colorScale(d.Quoi)
+                };
+                nodes.push(contributorNode);
+
+                const contributorTopics = d.Topic.split(',').map(t => t.trim());
+                contributorTopics.forEach(topic => {
+                    if (topic) {
+                        let topicNode = nodes.find(n => n.id === `topic_${topic}`);
+                        if (!topicNode) {
+                            topicNode = {
+                                id: `topic_${topic}`,
+                                name: topic,
+                                type: 'topic',
+                                color: '#ddd'
+                            };
+                            nodes.push(topicNode);
+                        }
+
+                        links.push({
+                            source: contributorNode.id,
+                            target: topicNode.id,
+                            quoi: d.Quoi
+                        });
+                    }
+                });
+            });
+
+            createLegend(quoiTypes);
+            createFilters(quoiTypes);
+            updateVisualization();
+        }
+
+        function createLegend(types) {
+            const legend = d3.select('#legend-content');
+            legend.selectAll('.legend-item').remove();
+
+            const items = legend.selectAll('.legend-item')
+                .data(types)
+                .enter()
+                .append('div')
+                .attr('class', 'legend-item');
+
+            items.append('span')
+                .attr('class', 'legend-color')
+                .style('background-color', d => colorScale(d));
+
+            items.append('span')
+                .text(d => d);
+        }
+
+        function createFilters(types) {
+            const filters = d3.select('#type-filters');
+
+            types.forEach(type => {
+                filters.append('button')
+                    .attr('class', 'filter-btn')
+                    .text(type)
+                    .on('click', () => filterByType(type));
+            });
+        }
+
+        function filterByType(type) {
+            currentFilter = type;
+
+            d3.selectAll('.filter-btn').classed('active', false);
+            d3.select(`button:nth-of-type(${type === 'all' ? 1 :
+                [...new Set(allData.map(d => d.Quoi))].indexOf(type) + 2})`)
+                .classed('active', true);
+
+            updateVisualization();
+        }
+
+        function updateVisualization() {
+            let filteredNodes = nodes;
+            let filteredLinks = links;
+
+            if (currentFilter !== 'all') {
+                const contributorIds = nodes
+                    .filter(n => n.type === 'contributor' && n.quoi === currentFilter)
+                    .map(n => n.id);
+
+                const connectedTopicIds = links
+                    .filter(l => contributorIds.includes(l.source))
+                    .map(l => l.target);
+
+                filteredNodes = nodes.filter(n =>
+                    contributorIds.includes(n.id) ||
+                    connectedTopicIds.includes(n.id));
+
+                filteredLinks = links.filter(l =>
+                    contributorIds.includes(l.source));
+            }
+
+            const simulation = d3.forceSimulation(filteredNodes)
+                .force('link', d3.forceLink(filteredLinks).id(d => d.id).distance(80))
+                .force('charge', d3.forceManyBody().strength(-300))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('collision', d3.forceCollide().radius(25));
+
+            svg.selectAll('.link').remove();
+            svg.selectAll('.node').remove();
+
+            const link = svg.append('g')
+                .selectAll('.link')
+                .data(filteredLinks)
+                .enter()
+                .append('line')
+                .attr('class', 'link');
+
+            const node = svg.append('g')
+                .selectAll('.node')
+                .data(filteredNodes)
+                .enter()
+                .append('circle')
+                .attr('class', 'node')
+                .attr('r', d => d.type === 'contributor' ? 8 : 6)
+                .style('fill', d => d.color)
+                .on('mouseover', showTooltip)
+                .on('mouseout', hideTooltip)
+                .call(d3.drag()
+                    .on('start', dragStarted)
+                    .on('drag', dragged)
+                    .on('end', dragEnded));
+
+            const tooltip = d3.select('#tooltip');
+
+            function showTooltip(event, d) {
+                tooltip.style('display', 'block')
+                    .style('left', (event.pageX + 10) + 'px')
+                    .style('top', (event.pageY - 10) + 'px')
+                    .html(`
+                        <strong>${d.name}</strong><br>
+                        ${d.type === 'contributor' ? `Type: ${d.quoi}<br>Topics: ${d.topic}` : 'Topic'}
+                    `);
+            }
+
+            function hideTooltip() {
+                tooltip.style('display', 'none');
+            }
+
+            simulation.on('tick', () => {
+                link
+                    .attr('x1', d => d.source.x)
+                    .attr('y1', d => d.source.y)
+                    .attr('x2', d => d.target.x)
+                    .attr('y2', d => d.target.y);
+
+                node
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => d.y);
+            });
+
+            function dragStarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+
+            function dragEnded(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+        }
+
+        processData();
+    </script>
+</body>
+</html>
