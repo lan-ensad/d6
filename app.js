@@ -7,11 +7,22 @@ fetch('contributions.json')
         const personSet = new Set();
         const personData = new Map();
         const topicData = new Map();
+        const contributions = []; // Pour stocker les contributions collectives
 
         let isPinned = false;
 
-        data.forEach(contribution => {
+        data.forEach((contribution, index) => {
             const personnes = Array.isArray(contribution.qui) ? contribution.qui : [contribution.qui];
+
+            // Stocker les contributions avec plusieurs auteurs
+            if (personnes.length > 1) {
+                contributions.push({
+                    id: `contrib-${index}`,
+                    personnes: personnes.map(p => p.nom),
+                    quoi: contribution.quoi,
+                    topics: contribution.topic
+                });
+            }
 
             personnes.forEach(p => {
                 if (!personSet.has(p.nom)) {
@@ -72,6 +83,9 @@ fetch('contributions.json')
             .force('x', d3.forceX(width / 2).strength(0.05))
             .force('y', d3.forceY(height / 2).strength(0.05));
 
+        // Groupe pour les enveloppes (dessous)
+        const hullGroup = g.append('g').attr('class', 'hulls');
+
         const link = g.append('g')
             .selectAll('line')
             .data(links)
@@ -103,6 +117,18 @@ fetch('contributions.json')
             .attr('dy', 4)
             .text(d => d.id);
 
+        // Créer les enveloppes pour les contributions collectives
+        const hulls = hullGroup.selectAll('ellipse')
+            .data(contributions)
+            .join('ellipse')
+            .attr('class', 'contribution-hull')
+            .on('mouseenter', (event, d) => showContributionInfo(d, false))
+            .on('mouseleave', hideInfoIfNotPinned)
+            .on('click', (event, d) => {
+                event.stopPropagation();
+                showContributionInfo(d, true);
+            });
+
         simulation.on('tick', () => {
             nodes.forEach(d => {
                 d.x = Math.max(margin, Math.min(width - margin, d.x));
@@ -116,6 +142,25 @@ fetch('contributions.json')
                 .attr('y2', d => d.target.y);
 
             node.attr('transform', d => `translate(${d.x},${d.y})`);
+
+            // Mettre à jour les enveloppes
+            hulls.each(function(contrib) {
+                const memberNodes = nodes.filter(n => contrib.personnes.includes(n.id));
+                if (memberNodes.length >= 2) {
+                    const xs = memberNodes.map(n => n.x);
+                    const ys = memberNodes.map(n => n.y);
+                    const cx = (Math.min(...xs) + Math.max(...xs)) / 2;
+                    const cy = (Math.min(...ys) + Math.max(...ys)) / 2;
+                    const rx = (Math.max(...xs) - Math.min(...xs)) / 2 + 30;
+                    const ry = (Math.max(...ys) - Math.min(...ys)) / 2 + 30;
+
+                    d3.select(this)
+                        .attr('cx', cx)
+                        .attr('cy', cy)
+                        .attr('rx', Math.max(rx, 40))
+                        .attr('ry', Math.max(ry, 40));
+                }
+            });
         });
 
         function dragstarted(event) {
@@ -175,6 +220,35 @@ fetch('contributions.json')
             info.style.display = 'block';
         }
 
+        function showContributionInfo(contrib, pin) {
+            const info = document.getElementById('info');
+            const content = document.getElementById('info-content');
+
+            if (pin) {
+                isPinned = true;
+                info.classList.add('pinned');
+            }
+
+            const memberNodes = nodes.filter(n => contrib.personnes.includes(n.id));
+
+            const html = `
+                <span class="type-badge type-contribution">Contribution collective</span>
+                <h3>${contrib.personnes.join(' + ')}</h3>
+                <p><strong>Auteur·ices:</strong></p>
+                <ul>${memberNodes.map(n => `<li>${n.id}<br><a href="mailto:${n.contact}">${n.contact}</a></li>`).join('')}</ul>
+                <p><strong>Topics:</strong></p>
+                <ul>${contrib.topics.map(t => `<li>${t}</li>`).join('')}</ul>
+                <p><strong>Format:</strong></p>
+                <ul>
+                    <li>Papier: ${contrib.quoi.papier}</li>
+                    <li>Web: ${contrib.quoi.web}</li>
+                </ul>
+            `;
+
+            content.innerHTML = html;
+            info.style.display = 'block';
+        }
+
         function hideInfoIfNotPinned() {
             if (!isPinned) {
                 document.getElementById('info').style.display = 'none';
@@ -193,5 +267,37 @@ fetch('contributions.json')
             info.style.display = 'none';
             info.classList.remove('pinned');
             isPinned = false;
+        });
+
+        // Remplir la sidebar
+        const statsEl = document.getElementById('stats');
+        const topicListEl = document.getElementById('topic-list');
+
+        // Statistiques
+        statsEl.innerHTML = `
+            <p>Contributions <span>${data.length}</span></p>
+            <p>Contributeur·ices <span>${personSet.size}</span></p>
+            <p>Topics <span>${topicSet.size}</span></p>
+        `;
+
+        // Liste des topics triés par nombre de contributeurs
+        const topicsSorted = Array.from(topicData.entries())
+            .sort((a, b) => b[1].personnes.length - a[1].personnes.length);
+
+        topicsSorted.forEach(([topic, data]) => {
+            const li = document.createElement('li');
+            li.innerHTML = `<span>${topic}</span><span class="count">${data.personnes.length}</span>`;
+            li.addEventListener('click', () => {
+                // Centrer sur le topic
+                const topicNode = nodes.find(n => n.id === topic);
+                if (topicNode) {
+                    svg.transition().duration(500).call(
+                        zoom.transform,
+                        d3.zoomIdentity.translate(width / 2 - topicNode.x, height / 2 - topicNode.y)
+                    );
+                    showInfo(topicNode, true);
+                }
+            });
+            topicListEl.appendChild(li);
         });
     });
