@@ -22,6 +22,22 @@
     },
     {
         "qui":
+        {
+            "nom":"Ashikara",
+            "rattachement":"youtubeur",
+            "contact":"interpelé sur instagram, mail à suivre"
+        },
+        "topic":[
+            "jeux-vidéo",
+            "art"
+        ],
+        "typologie":{
+            "papier":"portfolio",
+            "web":"vidéo youtube"
+        }
+    },
+    {
+        "qui":
         [{
             "nom":"Flora Bouteille",
             "rattachement":"ensad",
@@ -233,7 +249,7 @@
             "art"
         ],
         "typologie":{
-            "papier":"portefolio",
+            "papier":"portfolio",
             "web":"N/A"
         }
     },
