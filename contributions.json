@@ -12,7 +12,7 @@
             "contact":"angelo.careri@ensad.fr"
         }],
         "topic":[
-            "jeux-vidéo",
+            "jeux",
             "art"
         ],
         "typologie":{
@@ -28,7 +28,7 @@
             "contact":"guillaume.roland.prod@gmail.com"
         },
         "topic":[
-            "jeux-vidéo",
+            "jeux",
             "art"
         ],
         "typologie":{
@@ -293,12 +293,28 @@
         },
         "topic":[
             "commun numérique",
-            "pédagogie",
-            "commun numérique"
+            "pédagogie"
         ],
         "typologie":{
             "papier":"essai",
             "web":"N/A"
+        }
+    },
+    {
+        "qui":{
+            "nom":"Iyo Bisseck",
+            "rattachement":"designer",
+            "contact":"hello@iyo.io"
+        },
+        "topic":[
+            "commun numérique",
+            "décolonialisme",
+            "jeux",
+            "société"
+        ],
+        "typologie":{
+            "papier":"portfolio",
+            "web":"jeux ?"
         }
     }
 ]
