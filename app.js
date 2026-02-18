@@ -4,6 +4,24 @@ let personData = new Map();
 let topicData = new Map();
 let zoom;
 
+function statusColor(status) {
+    if (status === 'revu') return '#27ae60';
+    if (status === 'relecture') return '#e67e22';
+    return '#e74c3c';
+}
+
+function statusClass(status) {
+    if (status === 'revu') return 'revu';
+    if (status === 'relecture') return 'relecture';
+    return 'todo';
+}
+
+function statusLabel(status) {
+    if (status === 'revu') return 'revu';
+    if (status === 'relecture') return 'en cours';
+    return 'à faire';
+}
+
 // ============================================================
 // PARSING DES DONNÉES
 // ============================================================
@@ -25,7 +43,8 @@ function parseData(data) {
                 id: `contrib-${index}`,
                 personnes: personnes.map(p => p.nom),
                 typologie: contribution.typologie,
-                topics: contribution.topic
+                topics: contribution.topic,
+                status: contribution.status || ''
             });
         }
 
@@ -40,12 +59,13 @@ function parseData(data) {
         personnes.forEach(p => {
             if (!personSet.has(p.nom)) {
                 personSet.add(p.nom);
-                nodes.push({ id: p.nom, type: 'person', rattachement: p.rattachement, contact: p.contact });
+                nodes.push({ id: p.nom, type: 'person', rattachement: p.rattachement, contact: p.contact, status: contribution.status || '' });
                 personData.set(p.nom, {
                     rattachement: p.rattachement,
                     contact: p.contact,
                     topics: [],
-                    typologie: contribution.typologie
+                    typologie: contribution.typologie,
+                    status: contribution.status || ''
                 });
             }
             contribution.topic.forEach(t => {
@@ -116,6 +136,7 @@ function showInfo(d, pin) {
             <h3>${d.id}</h3>
             <p><strong>Rattachement:</strong> ${p.rattachement}</p>
             <p><strong>Contact:</strong> <a href="mailto:${p.contact}">${p.contact}</a></p>
+            <p><strong>Status:</strong> <span class="status-badge status-${statusClass(p.status)}">${statusLabel(p.status)}</span></p>
             <p><strong>Topics:</strong></p>
             <ul>${p.topics.map(t => `<li>${t}</li>`).join('')}</ul>
             <p><strong>Contribution:</strong></p>
@@ -161,6 +182,7 @@ function showContributionInfo(contrib, pin) {
             <li>Papier: ${contrib.typologie.papier}</li>
             <li>Web: ${contrib.typologie.web}</li>
         </ul>
+        <p><strong>Status:</strong> <span class="status-badge status-${statusClass(contrib.status)}">${statusLabel(contrib.status)}</span></p>
     `;
 
     content.innerHTML = html;
@@ -238,7 +260,8 @@ function createGraph(svg, links, contributions, simulation, width, height, margi
         });
 
     node.append('circle')
-        .attr('r', d => d.type === 'person' ? 8 : 6);
+        .attr('r', d => d.type === 'person' ? 8 : 6)
+        .style('fill', d => d.type === 'person' ? statusColor(d.status) : null);
 
     node.append('text')
         .attr('class', 'label')
@@ -314,6 +337,20 @@ function populateSidebars(data, typesPapier, typesWeb, personSet, topicSet, svg,
         <p>Topics <span>${topicSet.size}</span></p>
     `;
 
+    // Statuts
+    const statusCounts = { todo: 0, relecture: 0, revu: 0 };
+    data.forEach(d => {
+        const s = d.status || '';
+        if (s === 'revu') statusCounts.revu++;
+        else if (s === 'relecture') statusCounts.relecture++;
+        else statusCounts.todo++;
+    });
+    document.getElementById('status-legend').innerHTML = `
+        <p><span class="legend-dot status-todo-dot"></span>à faire <span>${statusCounts.todo}</span></p>
+        <p><span class="legend-dot status-relecture-dot"></span>en cours <span>${statusCounts.relecture}</span></p>
+        <p><span class="legend-dot status-revu-dot"></span>revu <span>${statusCounts.revu}</span></p>
+    `;
+
     // Types de contributions
     const papierList = Array.from(typesPapier.entries())
         .sort((a, b) => b[1] - a[1])
@@ -385,7 +422,7 @@ function init(data) {
 // CHARGEMENT DES DONNÉES
 // ============================================================
 
-fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributions.json')
-// fetch('contributions.json')
+fetch('https://raw.githubusercontent.com/lan-ensad/d6/refs/heads/main/contributions.json') //→ on push
+// fetch('contributions.json') //→dev mod
     .then(response => response.json())
     .then(init);

@@ -1,323 +1,345 @@
 [
     {
-        "qui":
-        [{
-            "nom":"Stella Jacob",
-            "rattachement":"ensad",
-            "contact":"stella.jacob@ensad.fr"
-        },
-        {
-            "nom":"Angelo Careri",
-            "rattachement":"ensad",
-            "contact":"angelo.careri@ensad.fr"
-        }],
-        "topic":[
+        "qui": [
+            {
+                "nom": "Stella Jacob",
+                "rattachement": "ensad",
+                "contact": "stella.jacob@ensad.fr"
+            },
+            {
+                "nom": "Angelo Careri",
+                "rattachement": "ensad",
+                "contact": "angelo.careri@ensad.fr"
+            }
+        ],
+        "topic": [
             "jeux",
             "art"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"jeux"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "jeux"
+        },
+        "status": ""
     },
     {
-        "qui":
-        {
-            "nom":"Ashikara",
-            "rattachement":"youtubeur",
-            "contact":"guillaume.roland.prod@gmail.com"
+        "qui": {
+            "nom": "Ashikara",
+            "rattachement": "youtubeur",
+            "contact": "guillaume.roland.prod@gmail.com"
         },
-        "topic":[
+        "topic": [
             "jeux",
             "art"
         ],
-        "typologie":{
-            "papier":"portfolio",
-            "web":"vidéo"
-        }
+        "typologie": {
+            "papier": "portfolio",
+            "web": "vidéo"
+        },
+        "status": ""
     },
     {
-        "qui":
-        [{
-            "nom":"Flora Bouteille",
-            "rattachement":"ensad",
-            "contact":"flora.bouteille@ensad.fr"
-        },
-        {
-            "nom":"Victor Villafagne",
-            "rattachement":"ensad",
-            "contact":"victor.villafagne@ensad.fr"
-        }],
-        "topic":[
+        "qui": [
+            {
+                "nom": "Flora Bouteille",
+                "rattachement": "ensad",
+                "contact": "flora.bouteille@ensad.fr"
+            },
+            {
+                "nom": "Victor Villafagne",
+                "rattachement": "ensad",
+                "contact": "victor.villafagne@ensad.fr"
+            }
+        ],
+        "topic": [
             "société",
             "intelligence artificielle",
             "art"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"vidéo"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "vidéo"
+        },
+        "status": ""
     },
     {
-        "qui":
-        [{
-            "nom":"Justinien Tribillion",
-            "rattachement":"ensad",
-            "contact":"justinien.tribillon@ensad.fr"
-        },
-        {
-            "nom":"Soline Nivet",
-            "rattachement":"ensad",
-            "contact":"contact@soline-nivet.fr"
-        }],
-        "topic":[
+        "qui": [
+            {
+                "nom": "Justinien Tribillion",
+                "rattachement": "ensad",
+                "contact": "justinien.tribillon@ensad.fr"
+            },
+            {
+                "nom": "Soline Nivet",
+                "rattachement": "ensad",
+                "contact": "contact@soline-nivet.fr"
+            }
+        ],
+        "topic": [
             "infrastructure",
             "architecture",
             "société"
         ],
-        "typologie":{
-            "papier":"entretient",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "entretient",
+            "web": "N/A"
+        },
+        "status": ""
     },
     {
-        "qui":
-        [{
-            "nom":"Bertrand Gauguet",
-            "rattachement":"ensad",
-            "contact":"bertrand.gauguet@ensad.fr"
-        },
-        {
-            "nom":"Benoît Montigné",
-            "rattachement":"ensad",
-            "contact":"benoit.montigne@ensad.fr"
-        }],
-        "topic":[
+        "qui": [
+            {
+                "nom": "Bertrand Gauguet",
+                "rattachement": "ensad",
+                "contact": "bertrand.gauguet@ensad.fr"
+            },
+            {
+                "nom": "Benoît Montigné",
+                "rattachement": "ensad",
+                "contact": "benoit.montigne@ensad.fr"
+            }
+        ],
+        "topic": [
             "son",
             "musique",
             "intelligence artificielle"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"composition textuelle hybride"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "composition textuelle hybride"
+        },
+        "status": ""
     },
     {
-        "qui":{
-            "nom":"Charlie Aubry",
-            "rattachement":"ensad",
-            "contact":"charlie.aubry@ensad.fr"
+        "qui": {
+            "nom": "Charlie Aubry",
+            "rattachement": "ensad",
+            "contact": "charlie.aubry@ensad.fr"
         },
-        "topic":[
+        "topic": [
             "sculpture",
             "interactivité",
             "art"
         ],
-        "typologie":{
-            "papier":"entretient",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "entretient",
+            "web": "N/A"
+        },
+        "status": ""
     },
     {
-        "qui":{
-            "nom":"Olivain Porry",
-            "rattachement":"ensad",
-            "contact":"op@olivain.art"
+        "qui": {
+            "nom": "Olivain Porry",
+            "rattachement": "ensad",
+            "contact": "op@olivain.art"
         },
-        "topic":[
+        "topic": [
             "intelligence artificielle",
             "interactivité",
             "art"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"script"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "script"
+        },
+        "status": "relecture"
     },
     {
-        "qui":{
-            "nom":"Stéphane Degoutin",
-            "rattachement":"ensad",
-            "contact":"stephane.degoutin@ensad.fr"
+        "qui": {
+            "nom": "Stéphane Degoutin",
+            "rattachement": "ensad",
+            "contact": "stephane.degoutin@ensad.fr"
         },
-        "topic":[
+        "topic": [
             "intelligence artificielle"
         ],
-        "typologie":{
-            "papier":"portfolio",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "portfolio",
+            "web": "N/A"
+        },
+        "status": ""
     },
     {
-        "qui":{
-            "nom":"Maude Guirault",
-            "rattachement":"ensad",
-            "contact":"maude.guirault@ensad.fr"
+        "qui": {
+            "nom": "Maude Guirault",
+            "rattachement": "ensad",
+            "contact": "maude.guirault@ensad.fr"
         },
-        "topic":[
+        "topic": [
             "textile",
             "interactivité",
             "art",
             "sculpture"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "N/A"
+        },
+        "status": "relecture"
     },
     {
-        "qui":{
-            "nom":"Corentin Loubet",
-            "rattachement":"ensad",
-            "contact":"corentin.loubet@ensad.fr"
+        "qui": {
+            "nom": "Corentin Loubet",
+            "rattachement": "ensad",
+            "contact": "corentin.loubet@ensad.fr"
         },
-        "topic":[
+        "topic": [
             "surveillance",
             "interactivité",
             "intelligence artificielle"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "N/A"
+        },
+        "status": ""
     },
     {
-        "qui":{
-            "nom":"Marie Lechner",
-            "rattachement":"ensad",
-            "contact":"marie.lechner@ensad.fr"
+        "qui": {
+            "nom": "Marie Lechner",
+            "rattachement": "ensad",
+            "contact": "marie.lechner@ensad.fr"
         },
-        "topic":[
+        "topic": [
             "art",
             "pédagogie"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "N/A"
+        },
+        "status": ""
     },
     {
-        "qui":{
-            "nom":"Adrien Payet",
-            "rattachement":"programmeur",
-            "contact":"adrien@studio-variable.com"
+        "qui": {
+            "nom": "Adrien Payet",
+            "rattachement": "programmeur",
+            "contact": "adrien@studio-variable.com"
         },
-        "topic":[
+        "topic": [
             "code",
             "outils"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"script"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "script"
+        },
+        "status": ""
     },
     {
-        "qui":{
-            "nom":"Jean-Noël Lafargue",
-            "rattachement":"pédagogue",
-            "contact":"jnlafargue@gmail.com"
+        "qui": {
+            "nom": "Jean-Noël Lafargue",
+            "rattachement": "pédagogue",
+            "contact": "jnlafargue@gmail.com"
         },
-        "topic":[
+        "topic": [
             "code",
             "outils",
             "pédagogie"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"script"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "N/A"
+        },
+        "status": "relecture"
     },
     {
-        "qui":{
-            "nom":"Saul Pandelakis",
-            "rattachement":"artiste",
-            "contact":"saul.pandelakis@gmail.com"
+        "qui": {
+            "nom": "Saul Pandelakis",
+            "rattachement": "artiste",
+            "contact": "saul.pandelakis@gmail.com"
         },
-        "topic":[
+        "topic": [
             "sex bot",
             "société"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "N/A"
+        },
+        "status": ""
     },
     {
-        "qui":{
-            "nom":"Josefa Ntjam",
-            "rattachement":"artiste",
-            "contact":"studio.josefantjam@gmail.com"
+        "qui": {
+            "nom": "Josefa Ntjam",
+            "rattachement": "artiste",
+            "contact": "studio.josefantjam@gmail.com"
         },
-        "topic":[
+        "topic": [
             "art"
         ],
-        "typologie":{
-            "papier":"portfolio",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "portfolio",
+            "web": "N/A"
+        },
+        "status": "relecture"
     },
     {
-        "qui":{
-            "nom":"Guillaume Seyller",
-            "rattachement":"INDEX",
-            "contact":"guillaume.seyller@gmail.com"
+        "qui": {
+            "nom": "Guillaume Seyller",
+            "rattachement": "INDEX",
+            "contact": "guillaume.seyller@gmail.com"
         },
-        "topic":[
+        "topic": [
             "surveillance",
             "société",
             "reconstitution"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "N/A"
+        },
+        "status": "relecture"
     },
     {
-        "qui":{
-            "nom":"Outdoor Computer Club",
-            "rattachement":"Outdoor Computer Club",
-            "contact":"outdoorcomputer@club1.fr"
+        "qui": {
+            "nom": "Outdoor Computer Club",
+            "rattachement": "Outdoor Computer Club",
+            "contact": "outdoorcomputer@club1.fr"
         },
-        "topic":[
+        "topic": [
             "décroissance",
             "partage",
             "commun numérique"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "N/A"
+        },
+        "status": "relecture"
     },
     {
-        "qui":{
-            "nom":"Audrey Samson",
-            "rattachement":"ERG Bruxelles",
-            "contact":"audrey.samson@erg.be"
+        "qui": {
+            "nom": "Audrey Samson",
+            "rattachement": "ERG Bruxelles",
+            "contact": "audrey.samson@erg.be"
         },
-        "topic":[
+        "topic": [
             "commun numérique",
             "pédagogie"
         ],
-        "typologie":{
-            "papier":"essai",
-            "web":"N/A"
-        }
+        "typologie": {
+            "papier": "essai",
+            "web": "N/A"
+        },
+        "status": ""
     },
     {
-        "qui":{
-            "nom":"Iyo Bisseck",
-            "rattachement":"designer",
-            "contact":"hello@iyo.io"
+        "qui": {
+            "nom": "Iyo Bisseck",
+            "rattachement": "designer",
+            "contact": "hello@iyo.io"
         },
-        "topic":[
+        "topic": [
             "commun numérique",
             "décolonialisme",
             "jeux",
             "société"
         ],
-        "typologie":{
-            "papier":"portfolio",
-            "web":"jeux ?"
-        }
+        "typologie": {
+            "papier": "portfolio",
+            "web": "jeux ?"
+        },
+        "status": ""
     }
 ]

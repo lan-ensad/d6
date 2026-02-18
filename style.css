@@ -1,7 +1,7 @@
 :root {
     --color-person: #4a90d9;
-    --color-topic: #e74c3c;
-    --color-contribution: #2ecc71;
+    --color-topic: #a27ff5;
+    --color-contribution: #60a0f3;
     --color-bg: #f8f9fa;
     --color-text: #2c3e50;
     --color-text-light: #7f8c8d;
@@ -360,6 +360,50 @@ svg {
 .type-contribution {
     background: var(--color-contribution);
     color: white;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.status-todo { background: #e74c3c; color: white; }
+.status-relecture { background: #e67e22; color: white; }
+.status-revu { background: #27ae60; color: white; }
+
+/* Status legend dots */
+.legend-dot.status-todo-dot { background: #e74c3c; }
+.legend-dot.status-relecture-dot { background: #e67e22; }
+.legend-dot.status-revu-dot { background: #27ae60; }
+
+/* Status legend */
+#status-legend {
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+#status-legend p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-start;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#status-legend p:last-child {
+    border-bottom: none;
+}
+
+#status-legend p span:last-child {
+    margin-left: auto;
+    font-weight: 600;
+    color: var(--color-person);
 }
 
 /* Scrollbar */
