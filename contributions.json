@@ -84,7 +84,7 @@
             "papier": "entretient",
             "web": "N/A"
         },
-        "status": ""
+        "status": "relecture"
     },
     {
         "qui": [
@@ -108,7 +108,7 @@
             "papier": "essai",
             "web": "composition textuelle hybride"
         },
-        "status": ""
+        "status": "relecture"
     },
     {
         "qui": {
@@ -125,7 +125,7 @@
             "papier": "entretient",
             "web": "N/A"
         },
-        "status": ""
+        "status": "relecture"
     },
     {
         "qui": {
@@ -322,7 +322,7 @@
             "papier": "essai",
             "web": "N/A"
         },
-        "status": ""
+        "status": "relecture"
     },
     {
         "qui": {
