@@ -142,7 +142,7 @@
             "papier": "essai",
             "web": "script"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": {
@@ -157,7 +157,7 @@
             "papier": "portfolio",
             "web": "N/A"
         },
-        "status": ""
+        "status": "revu"
     },
     {
         "qui": {
@@ -175,7 +175,7 @@
             "papier": "essai",
             "web": "N/A"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": {
@@ -272,7 +272,7 @@
             "papier": "portfolio",
             "web": "N/A"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": {
@@ -289,7 +289,7 @@
             "papier": "essai",
             "web": "N/A"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": {
@@ -306,7 +306,7 @@
             "papier": "essai",
             "web": "N/A"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": {
@@ -336,10 +336,11 @@
             "jeux",
             "société"
         ],
+        "bio":"Iyo Bisseck est une artiste indisciplinée, designer d’interactions et programmeuse franco-camerounaise. Elle développe une pratique mêlant environnements numériques immersifs, installations sculpturales, images animées et jeux (vidéo). Active au sein de collectifs tels que Dreaming Beyond AI et Matri-Archi(tecture), elle conçoit des plateformes en ligne soutenant des initiatives culturelles et engagées. Son travail examine de manière critique la construction, l’usage et la perception des archives dans les contextes contemporains, en s’intéressant à la matérialité du numérique tout en exposant les continuités coloniales. Sa recherche propose une exploration afroféministe de l’infrastructure numérique à travers la conception, l’étude et l’activation d’un serveur collectif pensé comme un lieu relationnel, un laboratoire abolitionniste et un espace de fabulation critique. Engagée dans la préservation et la réinvention des archives, Iyo tisse des récits Afrodiasporiques à travers la fiction et les médias interactifs. Elle a présenté ses travaux à Nieuwe Instituut (Rotterdam), Ars Electronica (Linz), Palais de Tokyo (Paris), à l'Akademie der Künste et à HAU4 (Berlin), ainsi qu'à Seed Pilot (Shenzhen). Iyo est également chargée de cours invitée à la FHNW de Bâle.",
         "typologie": {
             "papier": "portfolio",
             "web": "jeux ?"
         },
-        "status": ""
+        "status": "revu"
     }
 ]
