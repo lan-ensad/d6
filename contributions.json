@@ -178,11 +178,18 @@
         "status": "revu"
     },
     {
-        "qui": {
-            "nom": "Corentin Loubet",
-            "rattachement": "ensad",
-            "contact": "corentin.loubet@ensad.fr"
-        },
+        "qui": [
+            {
+                "nom": "Corentin Loubet",
+                "rattachement": "ensad",
+                "contact": "corentin.loubet@ensad.fr"
+            },
+            {
+                "nom": "Assia Wirth",
+                "rattachement": "saclay",
+                "contact": "assia.wirth@universite-paris-saclay.fr"
+            }
+        ],
         "topic": [
             "surveillance",
             "interactivité",
@@ -192,7 +199,7 @@
             "papier": "essai",
             "web": "N/A"
         },
-        "status": ""
+        "status": "relecture"
     },
     {
         "qui": {
