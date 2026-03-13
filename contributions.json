@@ -39,6 +39,22 @@
         "status": ""
     },
     {
+        "qui": {
+            "nom": "Remi Sagot-Duvauroux",
+            "rattachement": "ensad",
+            "contact": "remi.sagot@ensad.fr"
+        },
+        "topic": [
+            "realité virtuelle",
+            "interactivité"
+        ],
+        "typologie": {
+            "papier": "essai",
+            "web": "N/A"
+        },
+        "status": "relecture"
+    },
+    {
         "qui": [
             {
                 "nom": "Flora Bouteille",
