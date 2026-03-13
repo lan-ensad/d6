@@ -219,22 +219,6 @@
     },
     {
         "qui": {
-            "nom": "Adrien Payet",
-            "rattachement": "programmeur",
-            "contact": "adrien@studio-variable.com"
-        },
-        "topic": [
-            "code",
-            "outils"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "script"
-        },
-        "status": ""
-    },
-    {
-        "qui": {
             "nom": "Jean-Noël Lafargue",
             "rattachement": "pédagogue",
             "contact": "jnlafargue@gmail.com"
