@@ -40,6 +40,23 @@
     },
     {
         "qui": {
+            "nom": "Cyberrance",
+            "rattachement": "ensad",
+            "contact": "luz.palacios@ensad.fr"
+        },
+        "topic": [
+            "commun numérique",
+            "infrastructure",
+            "société"
+        ],
+        "typologie": {
+            "papier": "portfolio",
+            "web": "vidéo"
+        },
+        "status": "relecture"
+    },
+    {
+        "qui": {
             "nom": "Remi Sagot-Duvauroux",
             "rattachement": "ensad",
             "contact": "remi.sagot@ensad.fr"
