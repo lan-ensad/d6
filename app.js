@@ -3,6 +3,7 @@ let nodes = [];
 let personData = new Map();
 let topicData = new Map();
 let zoom;
+let activeFilter = null; // { category: 'papier'|'web', type: string }
 
 function statusColor(status) {
     if (status === 'revu') return '#27ae60';
@@ -30,23 +31,11 @@ function parseData(data) {
     const links = [];
     const topicSet = new Set();
     const personSet = new Set();
-    const contributions = [];
     const typesPapier = new Map();
     const typesWeb = new Map();
 
     data.forEach((contribution, index) => {
         const personnes = Array.isArray(contribution.qui) ? contribution.qui : [contribution.qui];
-
-        // Stocker les contributions avec plusieurs auteurs
-        if (personnes.length > 1) {
-            contributions.push({
-                id: `contrib-${index}`,
-                personnes: personnes.map(p => p.nom),
-                typologie: contribution.typologie,
-                topics: contribution.topic,
-                status: contribution.status || ''
-            });
-        }
 
         // Collecter les types de contributions avec comptage
         if (contribution.typologie.papier && contribution.typologie.papier !== 'N/A') {
@@ -56,10 +45,10 @@ function parseData(data) {
             typesWeb.set(contribution.typologie.web, (typesWeb.get(contribution.typologie.web) || 0) + 1);
         }
 
+        // Stocker les données de chaque personne
         personnes.forEach(p => {
             if (!personSet.has(p.nom)) {
                 personSet.add(p.nom);
-                nodes.push({ id: p.nom, type: 'person', rattachement: p.rattachement, contact: p.contact, status: contribution.status || '' });
                 personData.set(p.nom, {
                     rattachement: p.rattachement,
                     contact: p.contact,
@@ -75,6 +64,33 @@ function parseData(data) {
             });
         });
 
+        // Créer le nœud : collectif ou individuel
+        if (personnes.length > 1) {
+            const contribId = `contrib-${index}`;
+            nodes.push({
+                id: contribId,
+                type: 'contribution',
+                personnes: personnes.map(p => p.nom),
+                contacts: personnes.map(p => p.contact),
+                rattachements: personnes.map(p => p.rattachement),
+                typologie: contribution.typologie,
+                status: contribution.status || '',
+                topics: contribution.topic
+            });
+            contribution.topic.forEach(t => {
+                links.push({ source: contribId, target: t });
+            });
+        } else {
+            const p = personnes[0];
+            if (!nodes.find(n => n.id === p.nom)) {
+                nodes.push({ id: p.nom, type: 'person', rattachement: p.rattachement, contact: p.contact, status: contribution.status || '' });
+            }
+            contribution.topic.forEach(t => {
+                links.push({ source: p.nom, target: t });
+            });
+        }
+
+        // Topics
         contribution.topic.forEach(t => {
             if (!topicSet.has(t)) {
                 topicSet.add(t);
@@ -82,7 +98,6 @@ function parseData(data) {
                 topicData.set(t, { personnes: [] });
             }
             personnes.forEach(p => {
-                links.push({ source: p.nom, target: t });
                 if (!topicData.get(t).personnes.find(x => x.nom === p.nom)) {
                     topicData.get(t).personnes.push({ nom: p.nom, contact: p.contact });
                 }
@@ -90,7 +105,7 @@ function parseData(data) {
         });
     });
 
-    return { links, contributions, typesPapier, typesWeb, personSet, topicSet };
+    return { links, typesPapier, typesWeb, personSet, topicSet };
 }
 
 // ============================================================
@@ -168,13 +183,11 @@ function showContributionInfo(contrib, pin) {
         info.classList.add('pinned');
     }
 
-    const memberNodes = nodes.filter(n => contrib.personnes.includes(n.id));
-
     const html = `
         <span class="type-badge type-contribution">Contribution collective</span>
         <h3>${contrib.personnes.join(' + ')}</h3>
         <p><strong>Auteur·ices:</strong></p>
-        <ul>${memberNodes.map(n => `<li>${n.id}<br><a href="mailto:${n.contact}">${n.contact}</a></li>`).join('')}</ul>
+        <ul>${contrib.personnes.map((nom, i) => `<li>${nom}<br><a href="mailto:${contrib.contacts[i]}">${contrib.contacts[i]}</a></li>`).join('')}</ul>
         <p><strong>Topics:</strong></p>
         <ul>${contrib.topics.map(t => `<li>${t}</li>`).join('')}</ul>
         <p><strong>Format:</strong></p>
@@ -222,7 +235,7 @@ function createSimulation(links, width, height) {
 // CRÉATION DU GRAPHE
 // ============================================================
 
-function createGraph(svg, links, contributions, simulation, width, height, margin) {
+function createGraph(svg, links, simulation, width, height, margin) {
     const g = svg.append('g');
 
     // Zoom
@@ -231,9 +244,6 @@ function createGraph(svg, links, contributions, simulation, width, height, margi
         .on('zoom', (event) => g.attr('transform', event.transform));
 
     svg.call(zoom);
-
-    // Groupe pour les enveloppes (dessous)
-    const hullGroup = g.append('g').attr('class', 'hulls');
 
     // Liens
     const link = g.append('g')
@@ -252,34 +262,53 @@ function createGraph(svg, links, contributions, simulation, width, height, margi
             .on('start', (e) => dragstarted(e, simulation))
             .on('drag', dragged)
             .on('end', (e) => dragended(e, simulation)))
-        .on('mouseenter', (_, d) => showInfo(d, false))
+        .on('mouseenter', (_, d) => {
+            if (d.type === 'contribution') showContributionInfo(d, false);
+            else showInfo(d, false);
+        })
         .on('mouseleave', hideInfoIfNotPinned)
         .on('click', (event, d) => {
             event.stopPropagation();
-            showInfo(d, true);
+            if (d.type === 'contribution') showContributionInfo(d, true);
+            else showInfo(d, true);
         });
 
-    node.append('circle')
-        .attr('r', d => d.type === 'person' ? 8 : 6)
-        .style('fill', d => d.type === 'person' ? statusColor(d.status) : null);
+    // Forme selon le type : cercle pour person/contribution, carré pour topic
+    node.each(function(d) {
+        const el = d3.select(this);
+        if (d.type === 'topic') {
+            el.append('rect')
+                .attr('width', 12)
+                .attr('height', 12)
+                .attr('x', -6)
+                .attr('y', -6);
+        } else {
+            el.append('circle')
+                .attr('r', d.type === 'person' ? 8 : 10)
+                .style('fill', (d.type === 'person' || d.type === 'contribution') ? statusColor(d.status) : null);
+        }
+    });
 
-    node.append('text')
-        .attr('class', 'label')
-        .attr('dx', 12)
-        .attr('dy', 4)
-        .text(d => d.id);
-
-    // Enveloppes pour les contributions collectives
-    const hulls = hullGroup.selectAll('ellipse')
-        .data(contributions)
-        .join('ellipse')
-        .attr('class', 'contribution-hull')
-        .on('mouseenter', (_, d) => showContributionInfo(d, false))
-        .on('mouseleave', hideInfoIfNotPinned)
-        .on('click', (event, d) => {
-            event.stopPropagation();
-            showContributionInfo(d, true);
-        });
+    // Labels
+    node.each(function(d) {
+        const el = d3.select(this);
+        if (d.type === 'contribution') {
+            // Noms empilés pour les contributions collectives
+            d.personnes.forEach((nom, i) => {
+                el.append('text')
+                    .attr('class', 'label')
+                    .attr('dx', 16)
+                    .attr('dy', i * 14 - ((d.personnes.length - 1) * 7) + 4)
+                    .text(nom);
+            });
+        } else {
+            el.append('text')
+                .attr('class', 'label')
+                .attr('dx', 12)
+                .attr('dy', 4)
+                .text(d.id);
+        }
+    });
 
     // Mise à jour à chaque tick
     simulation.on('tick', () => {
@@ -296,25 +325,6 @@ function createGraph(svg, links, contributions, simulation, width, height, margi
             .attr('y2', d => d.target.y);
 
         node.attr('transform', d => `translate(${d.x},${d.y})`);
-
-        // Mettre à jour les enveloppes
-        hulls.each(function(contrib) {
-            const memberNodes = nodes.filter(n => contrib.personnes.includes(n.id));
-            if (memberNodes.length >= 2) {
-                const xs = memberNodes.map(n => n.x);
-                const ys = memberNodes.map(n => n.y);
-                const cx = (Math.min(...xs) + Math.max(...xs)) / 2;
-                const cy = (Math.min(...ys) + Math.max(...ys)) / 2;
-                const rx = (Math.max(...xs) - Math.min(...xs)) / 2 + 30;
-                const ry = (Math.max(...ys) - Math.min(...ys)) / 2 + 30;
-
-                d3.select(this)
-                    .attr('cx', cx)
-                    .attr('cy', cy)
-                    .attr('rx', Math.max(rx, 40))
-                    .attr('ry', Math.max(ry, 40));
-            }
-        });
     });
 
     // Fermer le panneau au clic sur le SVG
@@ -322,10 +332,139 @@ function createGraph(svg, links, contributions, simulation, width, height, margi
 }
 
 // ============================================================
+// FILTRE PAR TYPE DE CONTRIBUTION
+// ============================================================
+
+function applyFilter(category, type) {
+    const svg = d3.select('svg');
+
+    // Toggle : si on clique sur le filtre actif, on le désactive
+    if (activeFilter && activeFilter.category === category && activeFilter.type === type) {
+        activeFilter = null;
+        svg.classed('filtered', false);
+        // Retirer toutes les classes de filtre
+        svg.selectAll('.node-person, .node-topic, .node-contribution').classed('filter-match', false).classed('filter-dim', false);
+        svg.selectAll('.link').classed('filter-dim', false);
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#topic-list li').forEach(li => li.classList.remove('active'));
+        return;
+    }
+
+    activeFilter = { category, type };
+    svg.classed('filtered', true);
+
+    // Trouver les personnes/contributions qui correspondent au filtre
+    const matchingNodeIds = new Set();
+    personData.forEach((data, name) => {
+        if (data.typologie[category] === type) {
+            matchingNodeIds.add(name);
+        }
+    });
+    // Aussi checker les nœuds contribution
+    nodes.forEach(n => {
+        if (n.type === 'contribution' && n.typologie[category] === type) {
+            matchingNodeIds.add(n.id);
+            n.personnes.forEach(name => matchingNodeIds.add(name));
+        }
+    });
+
+    // Trouver les topics connectés
+    const matchingTopics = new Set();
+    topicData.forEach((data, topicName) => {
+        data.personnes.forEach(p => {
+            if (matchingNodeIds.has(p.nom)) {
+                matchingTopics.add(topicName);
+            }
+        });
+    });
+
+    // Appliquer les classes aux nœuds
+    svg.selectAll('.node-person, .node-topic, .node-contribution').each(function(d) {
+        const el = d3.select(this);
+        const isMatch = (d.type === 'person' && matchingNodeIds.has(d.id)) ||
+                        (d.type === 'contribution' && matchingNodeIds.has(d.id)) ||
+                        (d.type === 'topic' && matchingTopics.has(d.id));
+        el.classed('filter-match', isMatch);
+        el.classed('filter-dim', !isMatch);
+    });
+
+    // Appliquer aux liens
+    svg.selectAll('.link').each(function(d) {
+        const sourceId = typeof d.source === 'object' ? d.source.id : d.source;
+        const targetId = typeof d.target === 'object' ? d.target.id : d.target;
+        const isMatch = (matchingNodeIds.has(sourceId) && matchingTopics.has(targetId));
+        d3.select(this).classed('filter-dim', !isMatch);
+    });
+
+    // Mettre à jour les boutons actifs
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    const activeBtn = document.querySelector(`#contribution-types .filter-btn[data-category="${category}"][data-type="${type}"]`);
+    if (activeBtn) activeBtn.classList.add('active');
+}
+
+function applyTopicFilter(topicName) {
+    const svg = d3.select('svg');
+
+    // Toggle : si on clique sur le filtre actif, on le désactive
+    if (activeFilter && activeFilter.category === 'topic' && activeFilter.type === topicName) {
+        activeFilter = null;
+        svg.classed('filtered', false);
+        svg.selectAll('.node-person, .node-topic, .node-contribution').classed('filter-match', false).classed('filter-dim', false);
+        svg.selectAll('.link').classed('filter-dim', false);
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#topic-list li').forEach(li => li.classList.remove('active'));
+        return;
+    }
+
+    activeFilter = { category: 'topic', type: topicName };
+    svg.classed('filtered', true);
+
+    // Trouver les personnes connectées à ce topic
+    const matchingPersons = new Set();
+    const tData = topicData.get(topicName);
+    if (tData) {
+        tData.personnes.forEach(p => matchingPersons.add(p.nom));
+    }
+
+    // Trouver les nœuds contribution dont au moins un membre est connecté
+    const matchingContribIds = new Set();
+    nodes.forEach(n => {
+        if (n.type === 'contribution' && n.topics.includes(topicName)) {
+            matchingContribIds.add(n.id);
+        }
+    });
+
+    // Appliquer les classes aux nœuds
+    svg.selectAll('.node-person, .node-topic, .node-contribution').each(function(d) {
+        const el = d3.select(this);
+        const isMatch = (d.type === 'topic' && d.id === topicName) ||
+                        (d.type === 'person' && matchingPersons.has(d.id)) ||
+                        (d.type === 'contribution' && matchingContribIds.has(d.id));
+        el.classed('filter-match', isMatch);
+        el.classed('filter-dim', !isMatch);
+    });
+
+    // Appliquer aux liens
+    svg.selectAll('.link').each(function(d) {
+        const sourceId = typeof d.source === 'object' ? d.source.id : d.source;
+        const targetId = typeof d.target === 'object' ? d.target.id : d.target;
+        const isMatch = (matchingPersons.has(sourceId) || matchingContribIds.has(sourceId)) && targetId === topicName;
+        d3.select(this).classed('filter-dim', !isMatch);
+    });
+
+    // Mettre à jour les éléments actifs
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('#topic-list li').forEach(li => li.classList.remove('active'));
+    document.querySelectorAll('#topic-list li').forEach(li => {
+        if (li.dataset.topic === topicName) li.classList.add('active');
+    });
+}
+
+// ============================================================
 // SIDEBARS
 // ============================================================
 
-function populateSidebars(data, typesPapier, typesWeb, personSet, topicSet, svg, width, height) {
+function populateSidebars(data, typesPapier, typesWeb, personSet, topicSet) {
     const statsEl = document.getElementById('stats');
     const topicListEl = document.getElementById('topic-list');
     const typesEl = document.getElementById('contribution-types');
@@ -351,14 +490,14 @@ function populateSidebars(data, typesPapier, typesWeb, personSet, topicSet, svg,
         <p><span class="legend-dot status-revu-dot"></span>revu <span>${statusCounts.revu}</span></p>
     `;
 
-    // Types de contributions
+    // Types de contributions (cliquables pour filtrer)
     const papierList = Array.from(typesPapier.entries())
         .sort((a, b) => b[1] - a[1])
-        .map(([type, count]) => `<p>${type} <span>${count}</span></p>`)
+        .map(([type, count]) => `<p class="filter-btn" data-category="papier" data-type="${type}">${type} <span>${count}</span></p>`)
         .join('');
     const webList = Array.from(typesWeb.entries())
         .sort((a, b) => b[1] - a[1])
-        .map(([type, count]) => `<p>${type} <span>${count}</span></p>`)
+        .map(([type, count]) => `<p class="filter-btn" data-category="web" data-type="${type}">${type} <span>${count}</span></p>`)
         .join('');
     typesEl.innerHTML = `
         <h5>Papier</h5>
@@ -367,6 +506,13 @@ function populateSidebars(data, typesPapier, typesWeb, personSet, topicSet, svg,
         ${webList}
     `;
 
+    // Ajouter les event listeners sur les boutons de filtre
+    typesEl.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            applyFilter(btn.dataset.category, btn.dataset.type);
+        });
+    });
+
     // Liste des topics triés par nombre de contributeurs
     document.getElementById('topic-count').textContent = topicSet.size;
     const topicsSorted = Array.from(topicData.entries())
@@ -374,16 +520,10 @@ function populateSidebars(data, typesPapier, typesWeb, personSet, topicSet, svg,
 
     topicsSorted.forEach(([topic, topicInfo]) => {
         const li = document.createElement('li');
+        li.dataset.topic = topic;
         li.innerHTML = `<span>${topic}</span><span class="count">${topicInfo.personnes.length}</span>`;
         li.addEventListener('click', () => {
-            const topicNode = nodes.find(n => n.id === topic);
-            if (topicNode) {
-                svg.transition().duration(500).call(
-                    zoom.transform,
-                    d3.zoomIdentity.translate(width / 2 - topicNode.x, height / 2 - topicNode.y)
-                );
-                showInfo(topicNode, true);
-            }
+            applyTopicFilter(topic);
         });
         topicListEl.appendChild(li);
     });
@@ -410,11 +550,11 @@ function init(data) {
         .attr('width', width)
         .attr('height', height);
 
-    const { links, contributions, typesPapier, typesWeb, personSet, topicSet } = parseData(data);
+    const { links, typesPapier, typesWeb, personSet, topicSet } = parseData(data);
     const simulation = createSimulation(links, width, height);
 
-    createGraph(svg, links, contributions, simulation, width, height, margin);
-    populateSidebars(data, typesPapier, typesWeb, personSet, topicSet, svg, width, height);
+    createGraph(svg, links, simulation, width, height, margin);
+    populateSidebars(data, typesPapier, typesWeb, personSet, topicSet);
     initEventListeners();
 }
 
