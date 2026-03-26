@@ -36,7 +36,7 @@
             "papier": "portfolio",
             "web": "vidéo"
         },
-        "status": ""
+        "status": "revu"
     },
     {
         "qui": {
@@ -69,7 +69,7 @@
             "papier": "essai",
             "web": "N/A"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": [
@@ -117,7 +117,7 @@
             "papier": "entretient",
             "web": "N/A"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": [
@@ -141,7 +141,7 @@
             "papier": "essai",
             "web": "composition textuelle hybride"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": {
@@ -158,7 +158,7 @@
             "papier": "entretient",
             "web": "N/A"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": {
@@ -265,7 +265,7 @@
             "papier": "essai",
             "web": "N/A"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": {
@@ -281,7 +281,7 @@
             "papier": "essai",
             "web": "N/A"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": {
@@ -334,7 +334,7 @@
     },
     {
         "qui": {
-            "nom": "Audrey Samson",
+            "nom": "ERG",
             "rattachement": "ERG Bruxelles",
             "contact": "audrey.samson@erg.be"
         },
@@ -346,7 +346,7 @@
             "papier": "essai",
             "web": "N/A"
         },
-        "status": "relecture"
+        "status": "revu"
     },
     {
         "qui": {
