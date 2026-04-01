@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tags — Sujets partagés</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .controls span.val { font-weight: 600; color: #2c3e50; min-width: 20px; display: inline-block; }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+
+  .tag-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 4px 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: border-color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tag-card:hover { border-color: #4a90d9; }
+  .tag-card.active { border-color: #4a90d9; border-width: 2px; }
+
+  .tag-header { display: flex; align-items: baseline; gap: 4px; }
+  .tag-word { font-size: 12px; font-weight: 700; color: #2c3e50; }
+  .tag-df { font-size: 10px; color: #7f8c8d; }
+  .tag-score-bar { display: none; }
+
+  .tag-docs { display: flex; flex-wrap: wrap; gap: 2px; }
+  .tag-doc {
+    display: inline-flex; align-items: center; gap: 2px;
+    padding: 1px 5px; border-radius: 8px;
+    font-size: 10px; font-weight: 500;
+    background: #f8f9fa; color: #2c3e50;
+  }
+  .tag-doc .dot {
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  }
+  .dot-essai { background: #4a90d9; }
+  .dot-portfolio { background: #a27ff5; }
+  .dot-entretien { background: #e67e22; }
+
+  .tag-doc .doc-score { display: none; }
+
+  h2 { font-size: 14px; font-weight: 600; color: #2c3e50; margin: 0 0 0.5rem; }
+  .legend-inline { display: flex; gap: 1rem; font-size: 12px; color: #7f8c8d; align-items: center; margin-bottom: 1rem; }
+  .legend-inline span { display: flex; align-items: center; gap: 4px; }
+
+  .main-layout { display: flex; gap: 1.5rem; align-items: flex-start; }
+  .graph-container { flex: 1; min-width: 0; }
+  .tag-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+  .tag-sidebar::-webkit-scrollbar { width: 4px; }
+  .tag-sidebar::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 2px; }
+  .tag-list { margin-bottom: 0; }
+
+  .graph-container {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  #graph { width: 100%; display: block; background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%); }
+  #graph .link { stroke: #bdc3c7; stroke-opacity: 0.4; }
+  #graph .label-doc { font-size: 12px; font-weight: 600; fill: #2c3e50; pointer-events: none; }
+  #graph .label-tag { font-size: 10px; font-weight: 500; fill: #7f8c8d; pointer-events: none; }
+  #graph .node-doc { cursor: grab; }
+  #graph .node-tag { cursor: grab; }
+  #graph .node-doc:hover circle { filter: brightness(1.1); }
+  #graph .node-tag:hover rect { filter: brightness(0.95); }
+  #graph.highlight .link { stroke-opacity: 0.08; }
+  #graph.highlight .link.active { stroke-opacity: 0.8; stroke: #4a90d9; stroke-width: 2; }
+  #graph.highlight .node-doc.dimmed { opacity: 0.5; }
+  #graph.highlight .node-tag.dimmed { opacity: 0.5; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="sommaire.html">Sommaire</a>
+  <a href="index.html">TF-IDF</a>
+  <a href="clusters.html">Clusters</a>
+  <a href="tags.html" class="active">Tags</a>
+</nav>
+
+<h1>Tags — Sujets partagés entre documents</h1>
+
+<div class="controls">
+  <label>Longueur min. du mot:
+    <input type="range" id="minLen" min="3" max="20" value="4">
+    <span class="val" id="minLenVal">4</span>
+  </label>
+  <label>Docs min. par tag:
+    <input type="range" id="minDf" min="3" max="10" value="3">
+    <span class="val" id="minDfVal">3</span>
+  </label>
+  <label>Docs max. par tag:
+    <input type="range" id="maxDf" min="3" max="15" value="12">
+    <span class="val" id="maxDfVal">12</span>
+  </label>
+  <label>Nb de tags:
+    <input type="range" id="topN" min="5" max="60" value="30">
+    <span class="val" id="topNVal">30</span>
+  </label>
+</div>
+
+<div class="legend-inline">
+  <span><span class="dot dot-essai" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span> essai</span>
+  <span><span class="dot dot-portfolio" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span> portfolio</span>
+  <span><span class="dot dot-entretien" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span> entretien</span>
+  <span style="margin-left:1rem;color:#95a5a6;">&#9632; tag</span>
+</div>
+
+<div class="main-layout">
+  <div class="graph-container" id="graph-container">
+    <svg id="graph"></svg>
+  </div>
+  <div class="tag-sidebar">
+    <h2>Tags</h2>
+    <div class="tag-list" id="tags"></div>
+  </div>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="tags.js"></script>
+</body>
+</html>

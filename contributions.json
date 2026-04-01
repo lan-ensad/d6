@@ -93,7 +93,7 @@
             "papier": "essai",
             "web": "vidéo"
         },
-        "status": ""
+        "status": "relecture"
     },
     {
         "qui": [
@@ -248,7 +248,7 @@
             "papier": "essai",
             "web": "N/A"
         },
-        "status": ""
+        "status": "relecture"
     },
     {
         "qui": {

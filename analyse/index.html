@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analyse TF-IDF</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="sommaire.html">Sommaire</a>
+  <a href="index.html" class="active">TF-IDF</a>
+  <a href="clusters.html">Clusters</a>
+  <a href="tags.html">Tags</a>
+</nav>
+
+<h1>Analyse TF-IDF des textes</h1>
+
+<div class="controls">
+  <label>Mots-clés par texte:
+    <input type="range" id="topN" min="5" max="40" value="20">
+    <span id="topNVal">20</span>
+  </label>
+  <label>Longueur min. du mot:
+    <input type="range" id="minLen" min="2" max="20" value="3">
+    <span id="minLenVal">3</span>
+  </label>
+  <label>Filtrer par type:
+    <select id="filterType">
+      <option value="all">Tous</option>
+      <option value="essai">Essais</option>
+      <option value="portfolio">Portfolios</option>
+    </select>
+  </label>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

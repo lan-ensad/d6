@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sommaire</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  table {
+    width: 100%;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+  }
+  th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #7f8c8d;
+    padding: 12px 16px;
+    border-bottom: 2px solid #e0e0e0;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  th:hover { color: #2c3e50; }
+  th.sorted { color: #4a90d9; }
+  th.sorted::after { content: ' ▲'; font-size: 9px; }
+  th.sorted.desc::after { content: ' ▼'; }
+  td {
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f8f9fa; }
+  .id-cell { font-family: monospace; font-size: 12px; color: #7f8c8d; }
+  .type-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+  }
+  .type-essai { background: #4a90d9; }
+  .type-portfolio { background: #a27ff5; }
+  .type-entretien { background: #e67e22; }
+  .auteur-cell { font-weight: 600; }
+  .words-cell { color: #7f8c8d; font-size: 12px; }
+  .excerpt { color: #7f8c8d; font-size: 12px; max-width: 400px; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="sommaire.html" class="active">Sommaire</a>
+  <a href="index.html">TF-IDF</a>
+  <a href="clusters.html">Clusters</a>
+  <a href="tags.html">Tags</a>
+</nav>
+
+<h1>Sommaire des textes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th data-col="id" class="sorted">ID</th>
+      <th data-col="type">Type</th>
+      <th data-col="auteur">Auteur</th>
+      <th data-col="words">Mots</th>
+      <th>Extrait</th>
+    </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<script src="sommaire.js"></script>
+</body>
+</html>
