@@ -1,12 +1,5 @@
-let textes = [];
 let sortCol = 'id';
 let sortAsc = true;
-
-async function load() {
-  const r = await fetch('textes.json');
-  textes = await r.json();
-  render();
-}
 
 function wordCount(t) {
   return t.texte.split(/\s+/).length;
@@ -67,4 +60,4 @@ document.querySelectorAll('th[data-col]').forEach(th => {
   });
 });
 
-load();
+loadTextes(render);
