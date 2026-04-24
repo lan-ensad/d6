@@ -1,370 +1,434 @@
 [
     {
-        "qui": [
-            {
-                "nom": "Stella Jacob",
-                "rattachement": "ensad",
-                "contact": "stella.jacob@ensad.fr"
-            },
-            {
-                "nom": "Angelo Careri",
-                "rattachement": "ensad",
-                "contact": "angelo.careri@ensad.fr"
-            }
-        ],
-        "topic": [
-            "jeux",
-            "art"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "jeux"
-        },
-        "status": "relecture"
-    },
-    {
-        "qui": {
-            "nom": "Ashikara",
-            "rattachement": "youtubeur",
-            "contact": "guillaume.roland.prod@gmail.com"
-        },
-        "topic": [
-            "jeux",
-            "art"
-        ],
-        "typologie": {
-            "papier": "portfolio",
-            "web": "vidéo"
-        },
-        "status": "revu"
-    },
-    {
-        "qui": {
-            "nom": "Cyberrance",
-            "rattachement": "ensad",
-            "contact": "luz.palacios@ensad.fr"
-        },
-        "topic": [
-            "commun numérique",
-            "infrastructure",
-            "société"
-        ],
-        "typologie": {
-            "papier": "portfolio",
-            "web": "vidéo"
-        },
-        "status": "revu"
-    },
-    {
-        "qui": {
-            "nom": "Remi Sagot-Duvauroux",
-            "rattachement": "ensad",
-            "contact": "remi.sagot@ensad.fr"
-        },
-        "topic": [
-            "realité virtuelle",
-            "interactivité"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "N/A"
-        },
-        "status": "revu"
-    },
-    {
-        "qui": [
-            {
-                "nom": "Flora Bouteille",
-                "rattachement": "ensad",
-                "contact": "flora.bouteille@ensad.fr"
-            },
-            {
-                "nom": "Victor Villafagne",
-                "rattachement": "ensad",
-                "contact": "victor.villafagne@ensad.fr"
-            }
-        ],
-        "topic": [
-            "société",
-            "intelligence artificielle",
-            "art"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "vidéo"
-        },
-        "status": "relecture"
-    },
-    {
-        "qui": [
-            {
-                "nom": "Justinien Tribillion",
-                "rattachement": "ensad",
-                "contact": "justinien.tribillon@ensad.fr"
-            },
-            {
-                "nom": "Soline Nivet",
-                "rattachement": "ensad",
-                "contact": "contact@soline-nivet.fr"
-            }
-        ],
-        "topic": [
-            "infrastructure",
-            "architecture",
-            "société"
-        ],
-        "typologie": {
-            "papier": "entretient",
-            "web": "N/A"
-        },
-        "status": "revu"
-    },
-    {
-        "qui": [
-            {
-                "nom": "Bertrand Gauguet",
-                "rattachement": "ensad",
-                "contact": "bertrand.gauguet@ensad.fr"
-            },
-            {
-                "nom": "Benoît Montigné",
-                "rattachement": "ensad",
-                "contact": "benoit.montigne@ensad.fr"
-            }
-        ],
-        "topic": [
-            "son",
-            "musique",
-            "intelligence artificielle"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "composition textuelle hybride"
-        },
-        "status": "revu"
-    },
-    {
-        "qui": {
-            "nom": "Charlie Aubry",
-            "rattachement": "ensad",
-            "contact": "charlie.aubry@ensad.fr"
-        },
-        "topic": [
-            "sculpture",
-            "interactivité",
-            "art"
-        ],
-        "typologie": {
-            "papier": "entretient",
-            "web": "N/A"
-        },
-        "status": "revu"
-    },
-    {
-        "qui": {
-            "nom": "Olivain Porry",
-            "rattachement": "ensad",
-            "contact": "op@olivain.art"
-        },
-        "topic": [
-            "intelligence artificielle",
-            "interactivité",
-            "art"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "script"
-        },
-        "status": "revu"
-    },
-    {
-        "qui": {
-            "nom": "Stéphane Degoutin",
-            "rattachement": "ensad",
-            "contact": "stephane.degoutin@ensad.fr"
-        },
-        "topic": [
-            "intelligence artificielle"
-        ],
-        "typologie": {
-            "papier": "portfolio",
-            "web": "N/A"
-        },
-        "status": "revu"
-    },
-    {
-        "qui": {
-            "nom": "Maude Guirault",
-            "rattachement": "ensad",
-            "contact": "maude.guirault@ensad.fr"
-        },
-        "topic": [
-            "textile",
-            "interactivité",
-            "art",
-            "sculpture"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "N/A"
-        },
-        "status": "revu"
-    },
-    {
-        "qui": [
-            {
-                "nom": "Corentin Loubet",
-                "rattachement": "ensad",
-                "contact": "corentin.loubet@ensad.fr"
-            },
-            {
-                "nom": "Assia Wirth",
-                "rattachement": "saclay",
-                "contact": "assia.wirth@universite-paris-saclay.fr"
-            }
-        ],
-        "topic": [
-            "surveillance",
-            "interactivité",
-            "intelligence artificielle"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "N/A"
-        },
-        "status": "relecture"
-    },
-    {
-        "qui": {
-            "nom": "Marie Lechner",
-            "rattachement": "ensad",
-            "contact": "marie.lechner@ensad.fr"
-        },
-        "topic": [
-            "art",
-            "pédagogie"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "N/A"
-        },
-        "status": "relecture"
-    },
-    {
-        "qui": {
-            "nom": "Jean-Noël Lafargue",
-            "rattachement": "pédagogue",
-            "contact": "jnlafargue@gmail.com"
-        },
-        "topic": [
-            "code",
+        "topic":[
+            "chatbot",
+            "recits",
+            "resistance",
+            "voix",
+            "enquête",
             "outils",
-            "pédagogie"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "N/A"
-        },
-        "status": "revu"
+            "architecture",
+            "infrastructure",
+            "collectif",
+            "automate",
+            "Logiciels",
+            "Algorithme",
+            "Jeux",
+            "Pédagogie"
+        ]
     },
-    {
-        "qui": {
-            "nom": "Saul Pandelakis",
-            "rattachement": "artiste",
-            "contact": "saul.pandelakis@gmail.com"
-        },
-        "topic": [
-            "sex bot",
-            "société"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "N/A"
-        },
-        "status": "revu"
+  {
+    "qui": [
+      {
+        "nom": "Stella Jacob",
+        "rattachement": "ensad",
+        "contact": "stella.jacob@ensad.fr"
+      },
+      {
+        "nom": "Angelo Careri",
+        "rattachement": "ensad",
+        "contact": "angelo.careri@ensad.fr"
+      }
+    ],
+    "topic": [
+        "chatbot",
+        "Jeux",
+        "collectif",
+        "Pédagogie"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "jeux"
     },
-    {
-        "qui": {
-            "nom": "Josefa Ntjam",
-            "rattachement": "artiste",
-            "contact": "studio.josefantjam@gmail.com"
-        },
-        "topic": [
-            "art"
-        ],
-        "typologie": {
-            "papier": "portfolio",
-            "web": "N/A"
-        },
-        "status": "revu"
+    "status": "relecture"
+  },
+  {
+    "qui": {
+      "nom": "Ashikara",
+      "rattachement": "youtubeur",
+      "contact": "guillaume.roland.prod@gmail.com"
     },
-    {
-        "qui": {
-            "nom": "Guillaume Seyller",
-            "rattachement": "INDEX",
-            "contact": "guillaume.seyller@gmail.com"
-        },
-        "topic": [
-            "surveillance",
-            "société",
-            "reconstitution"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "N/A"
-        },
-        "status": "revu"
+    "topic": [
+        "Jeux",
+        "recits",
+        "architecture",
+        "Logiciels"
+    ],
+    "typologie": {
+      "papier": "portfolio",
+      "web": "vidéo"
     },
-    {
-        "qui": {
-            "nom": "Outdoor Computer Club",
-            "rattachement": "Outdoor Computer Club",
-            "contact": "outdoorcomputer@club1.fr"
-        },
-        "topic": [
-            "décroissance",
-            "partage",
-            "commun numérique"
-        ],
-        "typologie": {
-            "papier": "essai",
-            "web": "N/A"
-        },
-        "status": "revu"
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Cyberrance",
+      "rattachement": "ensad",
+      "contact": "luz.palacios@ensad.fr"
     },
-    {
-        "qui": {
-            "nom": "ERG",
-            "rattachement": "ERG Bruxelles",
-            "contact": "audrey.samson@erg.be"
-        },
-        "topic": [
-            "commun numérique",
-            "pédagogie"
-        ],
-        "typologie": {
-            "papier": "entretient",
-            "web": "N/A"
-        },
-        "status": "revu"
+    "topic": [
+        "collectif",
+        "resistance",
+        "infrastructure",
+        "outils"
+    ],
+    "typologie": {
+      "papier": "portfolio",
+      "web": "vidéo"
     },
-    {
-        "qui": {
-            "nom": "Iyo Bisseck",
-            "rattachement": "designer",
-            "contact": "hello@iyo.io"
-        },
-        "topic": [
-            "commun numérique",
-            "décolonialisme",
-            "jeux",
-            "société"
-        ],
-        "bio":"Iyo Bisseck est une artiste indisciplinée, designer d’interactions et programmeuse franco-camerounaise. Elle développe une pratique mêlant environnements numériques immersifs, installations sculpturales, images animées et jeux (vidéo). Active au sein de collectifs tels que Dreaming Beyond AI et Matri-Archi(tecture), elle conçoit des plateformes en ligne soutenant des initiatives culturelles et engagées. Son travail examine de manière critique la construction, l’usage et la perception des archives dans les contextes contemporains, en s’intéressant à la matérialité du numérique tout en exposant les continuités coloniales. Sa recherche propose une exploration afroféministe de l’infrastructure numérique à travers la conception, l’étude et l’activation d’un serveur collectif pensé comme un lieu relationnel, un laboratoire abolitionniste et un espace de fabulation critique. Engagée dans la préservation et la réinvention des archives, Iyo tisse des récits Afrodiasporiques à travers la fiction et les médias interactifs. Elle a présenté ses travaux à Nieuwe Instituut (Rotterdam), Ars Electronica (Linz), Palais de Tokyo (Paris), à l'Akademie der Künste et à HAU4 (Berlin), ainsi qu'à Seed Pilot (Shenzhen). Iyo est également chargée de cours invitée à la FHNW de Bâle.",
-        "typologie": {
-            "papier": "portfolio",
-            "web": "jeux ?"
-        },
-        "status": "revu"
-    }
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Remi Sagot-Duvauroux",
+      "rattachement": "ensad",
+      "contact": "remi.sagot@ensad.fr"
+    },
+    "topic": [
+        "automate",
+        "collectif",
+        "Jeux",
+        "recits"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Adrien Payer",
+      "rattachement": "designer",
+      "contact": "adrien@studio-variable.com"
+    },
+    "topic": [
+        "outils",
+        "infrastructure",
+        "Logiciels",
+        "automate"
+    ],
+    "typologie": {
+      "papier": "entretient",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": [
+      {
+        "nom": "Flora Bouteille",
+        "rattachement": "ensad",
+        "contact": "flora.bouteille@ensad.fr"
+      },
+      {
+        "nom": "Victor Villafagne",
+        "rattachement": "ensad",
+        "contact": "victor.villafagne@ensad.fr"
+      }
+    ],
+    "topic": [
+        "resistance",
+        "infrastructure",
+        "collectif",
+        "Algorithme"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "vidéo"
+    },
+    "status": "relecture"
+  },
+  {
+    "qui": [
+      {
+        "nom": "Justinien Tribillion",
+        "rattachement": "ensad",
+        "contact": "justinien.tribillon@ensad.fr"
+      },
+      {
+        "nom": "Soline Nivet",
+        "rattachement": "ensad",
+        "contact": "contact@soline-nivet.fr"
+      }
+    ],
+    "topic": [
+        "infrastructure",
+        "architecture",
+        "enquête",
+        "recits"
+    ],
+    "typologie": {
+      "papier": "entretient",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": [
+      {
+        "nom": "Bertrand Gauguet",
+        "rattachement": "ensad",
+        "contact": "bertrand.gauguet@ensad.fr"
+      },
+      {
+        "nom": "Benoît Montigné",
+        "rattachement": "ensad",
+        "contact": "benoit.montigne@ensad.fr"
+      }
+    ],
+    "topic": [
+        "voix",
+        "outils",
+        "Algorithme",
+        "Pédagogie"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "composition textuelle hybride"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Charlie Aubry",
+      "rattachement": "ensad",
+      "contact": "charlie.aubry@ensad.fr"
+    },
+    "topic": [
+        "chatbot",
+        "Algorithme",
+        "Logiciels",
+        "infrastructure"
+    ],
+    "typologie": {
+      "papier": "entretient",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Olivain Porry",
+      "rattachement": "ensad",
+      "contact": "op@olivain.art"
+    },
+    "topic": [
+        "Algorithme",
+        "chatbot",
+        "recits",
+        "architecture"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "script"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Stéphane Degoutin",
+      "rattachement": "ensad",
+      "contact": "stephane.degoutin@ensad.fr"
+    },
+    "topic": [
+        "chatbot",
+        "outils",
+        "recits",
+        "resistance"
+    ],
+    "typologie": {
+      "papier": "portfolio",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Maude Guirault",
+      "rattachement": "ensad",
+      "contact": "maude.guirault@ensad.fr"
+    },
+    "topic": [
+        "Algorithme",
+        "outils",
+        "Jeux",
+        "automate"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": [
+      {
+        "nom": "Corentin Loubet",
+        "rattachement": "ensad",
+        "contact": "corentin.loubet@ensad.fr"
+      },
+      {
+        "nom": "Assia Wirth",
+        "rattachement": "saclay",
+        "contact": "assia.wirth@universite-paris-saclay.fr"
+      }
+    ],
+    "topic": [
+        "automate",
+        "recits",
+        "infrastructure",
+        "resistance"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Marie Lechner",
+      "rattachement": "ensad",
+      "contact": "marie.lechner@ensad.fr"
+    },
+    "topic": [
+        "resistance",
+        "recits",
+        "Algorithme",
+        "chatbot"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Jean-Noël Lafargue",
+      "rattachement": "pédagogue",
+      "contact": "jnlafargue@gmail.com"
+    },
+    "topic": [
+        "Pédagogie",
+        "outils",
+        "Logiciels",
+        "Algorithme"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Saul Pandelakis",
+      "rattachement": "artiste",
+      "contact": "saul.pandelakis@gmail.com"
+    },
+    "topic": [
+        "Pédagogie",
+        "chatbot",
+        "collectif",
+        "recits"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Josefa Ntjam",
+      "rattachement": "artiste",
+      "contact": "studio.josefantjam@gmail.com"
+    },
+    "topic": [
+        "Algorithme",
+        "Jeux",
+        "recits",
+        "outils"
+    ],
+    "typologie": {
+      "papier": "portfolio",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Guillaume Seyller",
+      "rattachement": "INDEX",
+      "contact": "guillaume.seyller@gmail.com"
+    },
+    "topic": [
+        "enquête",
+        "Logiciels",
+        "resistance",
+        "voix"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Outdoor Computer Club",
+      "rattachement": "Outdoor Computer Club",
+      "contact": "outdoorcomputer@club1.fr"
+    },
+    "topic": [
+        "infrastructure",
+        "collectif",
+        "recits",
+        "resistance"
+    ],
+    "typologie": {
+      "papier": "essai",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "ERG",
+      "rattachement": "ERG Bruxelles",
+      "contact": "audrey.samson@erg.be"
+    },
+    "topic": [
+        "Pédagogie",
+        "infrastructure",
+        "resistance",
+        "collectif"
+    ],
+    "typologie": {
+      "papier": "entretient",
+      "web": "N/A"
+    },
+    "status": "revu"
+  },
+  {
+    "qui": {
+      "nom": "Iyo Bisseck",
+      "rattachement": "designer",
+      "contact": "hello@iyo.io"
+    },
+    "topic": [
+        "collectif",
+        "infrastructure",
+        "architecture",
+        "resistance"
+    ],
+    "bio": "Iyo Bisseck est une artiste indisciplinée, designer d’interactions et programmeuse franco-camerounaise. Elle développe une pratique mêlant environnements numériques immersifs, installations sculpturales, images animées et jeux (vidéo). Active au sein de collectifs tels que Dreaming Beyond AI et Matri-Archi(tecture), elle conçoit des plateformes en ligne soutenant des initiatives culturelles et engagées. Son travail examine de manière critique la construction, l’usage et la perception des archives dans les contextes contemporains, en s’intéressant à la matérialité du numérique tout en exposant les continuités coloniales. Sa recherche propose une exploration afroféministe de l’infrastructure numérique à travers la conception, l’étude et l’activation d’un serveur collectif pensé comme un lieu relationnel, un laboratoire abolitionniste et un espace de fabulation critique. Engagée dans la préservation et la réinvention des archives, Iyo tisse des récits Afrodiasporiques à travers la fiction et les médias interactifs. Elle a présenté ses travaux à Nieuwe Instituut (Rotterdam), Ars Electronica (Linz), Palais de Tokyo (Paris), à l'Akademie der Künste et à HAU4 (Berlin), ainsi qu'à Seed Pilot (Shenzhen). Iyo est également chargée de cours invitée à la FHNW de Bâle.",
+    "typologie": {
+      "papier": "portfolio",
+      "web": "jeux ?"
+    },
+    "status": "revu"
+  }
 ]

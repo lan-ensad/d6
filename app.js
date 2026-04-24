@@ -35,14 +35,18 @@ function parseData(data) {
     const typesWeb = new Map();
 
     data.forEach((contribution, index) => {
+        if (!contribution.qui) return;
         const personnes = Array.isArray(contribution.qui) ? contribution.qui : [contribution.qui];
+        const topics = Array.isArray(contribution.topic) ? contribution.topic : [];
+        const typologie = contribution.typologie || { papier: 'N/A', web: 'N/A' };
+        contribution.typologie = typologie;
 
         // Collecter les types de contributions avec comptage
-        if (contribution.typologie.papier && contribution.typologie.papier !== 'N/A') {
-            typesPapier.set(contribution.typologie.papier, (typesPapier.get(contribution.typologie.papier) || 0) + 1);
+        if (typologie.papier && typologie.papier !== 'N/A') {
+            typesPapier.set(typologie.papier, (typesPapier.get(typologie.papier) || 0) + 1);
         }
-        if (contribution.typologie.web && contribution.typologie.web !== 'N/A') {
-            typesWeb.set(contribution.typologie.web, (typesWeb.get(contribution.typologie.web) || 0) + 1);
+        if (typologie.web && typologie.web !== 'N/A') {
+            typesWeb.set(typologie.web, (typesWeb.get(typologie.web) || 0) + 1);
         }
 
         // Stocker les données de chaque personne
@@ -57,7 +61,7 @@ function parseData(data) {
                     status: contribution.status || ''
                 });
             }
-            contribution.topic.forEach(t => {
+            topics.forEach(t => {
                 if (!personData.get(p.nom).topics.includes(t)) {
                     personData.get(p.nom).topics.push(t);
                 }
@@ -65,33 +69,30 @@ function parseData(data) {
         });
 
         // Créer le nœud : collectif ou individuel
+        let nodeId;
         if (personnes.length > 1) {
-            const contribId = `contrib-${index}`;
+            nodeId = `contrib-${index}`;
             nodes.push({
-                id: contribId,
+                id: nodeId,
                 type: 'contribution',
                 personnes: personnes.map(p => p.nom),
                 contacts: personnes.map(p => p.contact),
                 rattachements: personnes.map(p => p.rattachement),
                 typologie: contribution.typologie,
                 status: contribution.status || '',
-                topics: contribution.topic
-            });
-            contribution.topic.forEach(t => {
-                links.push({ source: contribId, target: t });
+                topics
             });
         } else {
             const p = personnes[0];
+            nodeId = p.nom;
             if (!nodes.find(n => n.id === p.nom)) {
                 nodes.push({ id: p.nom, type: 'person', rattachement: p.rattachement, contact: p.contact, status: contribution.status || '' });
             }
-            contribution.topic.forEach(t => {
-                links.push({ source: p.nom, target: t });
-            });
         }
+        topics.forEach(t => links.push({ source: nodeId, target: t }));
 
         // Topics
-        contribution.topic.forEach(t => {
+        topics.forEach(t => {
             if (!topicSet.has(t)) {
                 topicSet.add(t);
                 nodes.push({ id: t, type: 'topic' });
@@ -152,8 +153,7 @@ function showInfo(d, pin) {
             <p><strong>Rattachement:</strong> ${p.rattachement}</p>
             <p><strong>Contact:</strong> <a href="mailto:${p.contact}">${p.contact}</a></p>
             <p><strong>Status:</strong> <span class="status-badge status-${statusClass(p.status)}">${statusLabel(p.status)}</span></p>
-            <p><strong>Topics:</strong></p>
-            <ul>${p.topics.map(t => `<li>${t}</li>`).join('')}</ul>
+            ${p.topics.length ? `<p><strong>Topics:</strong></p><ul>${p.topics.map(t => `<li>${t}</li>`).join('')}</ul>` : ''}
             <p><strong>Contribution:</strong></p>
             <ul>
                 <li>Papier: ${p.typologie.papier}</li>
@@ -188,8 +188,7 @@ function showContributionInfo(contrib, pin) {
         <h3>${contrib.personnes.join(' + ')}</h3>
         <p><strong>Auteur·ices:</strong></p>
         <ul>${contrib.personnes.map((nom, i) => `<li>${nom}<br><a href="mailto:${contrib.contacts[i]}">${contrib.contacts[i]}</a></li>`).join('')}</ul>
-        <p><strong>Topics:</strong></p>
-        <ul>${contrib.topics.map(t => `<li>${t}</li>`).join('')}</ul>
+        ${contrib.topics.length ? `<p><strong>Topics:</strong></p><ul>${contrib.topics.map(t => `<li>${t}</li>`).join('')}</ul>` : ''}
         <p><strong>Format:</strong></p>
         <ul>
             <li>Papier: ${contrib.typologie.papier}</li>
